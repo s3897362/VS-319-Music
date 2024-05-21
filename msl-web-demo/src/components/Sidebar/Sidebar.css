@@ -1,0 +1,14 @@
+.Sidebar{
+    height: 100%;
+    width: 210px;
+    background-color: #262261;
+    position: relative;
+    color: white;
+  
+    transition: 0.4s;
+  }
+  
+  .logo img{
+    width: 80px;
+    padding: 30px;
+  }
