@@ -1,6 +1,6 @@
-.Sidebar{
-    height: 100%;
-    width: 210px;
+.side-nav-container{
+    height: 100vh;
+    width: 200px;
     background-color: #262261;
     position: relative;
     color: white;
@@ -8,7 +8,51 @@
     transition: 0.4s;
   }
   
-  .logo img{
-    width: 80px;
-    padding: 30px;
-  }
+/* .side-nav-container-NX {
+  width: 80px;
+} */
+.side-nav-container-NX{
+  
+}
+.nav-upper, .nav-heading, .nav-menu, .menu-item{
+  display: grid;
+}
+
+.nav-heading{
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr;
+  height: 75px;
+}
+
+.nav-brand img{
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+/* .ham-menu{
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+
+  margin: auto -30px;
+  background-color: #F7941E;
+  border-radius: 90px;
+  margin-top: 15px;
+  padding: 10px ;
+  height: 50px;
+  width: 50px;
+}
+.ham-menu span{
+  display: block;
+  margin-top: 4px;
+  background-color: #262261;
+  border-radius: 15px;
+  height: 4px;
+  width: 30px;
+
+  transition: 0.4s;
+} */
