@@ -39,16 +39,18 @@ const Sidebar =() => {
                     <div className="nav-brand">
                         <img src="img/logo.png"></img>
                     </div>
-                    {/* <button className='ham-menu'>
+                    <button className={isExpanded ? 'ham-menu ham-in' : "ham-menu ham-out"}
+                        onClick={() => setExpendState(!isExpanded)}>
                         <span></span>
                         <span></span>
                         <span></span>
-                    </button> */}
+                    </button>
                 </div>
-                <div className="nav-meny">
+                <div className="nav-menu">
                     {menuItem.map(({text,icon}) => (
                         <a href="#" className='menu-item'>
-                            <img src={icon} alt="" srcset=""/>
+                            <img className='menu-icon' src={icon} alt="" srcset=""/>
+                            <p className='nav-item'>{text}</p>
                         </a>
                     ))}
 
