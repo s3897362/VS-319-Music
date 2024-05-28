@@ -1,7 +1,8 @@
 .side-nav-container{
-    width: 180px;
+    width: 200px;
+    height: fit-content;
     background-color: #262261;
-    position: relative;
+    position: absolute;
     color: white;
     align-items: center;
   
@@ -11,9 +12,12 @@
 .side-nav-container-NX{
   width: 85px;
 }
+
+.nav-upper{
+  height: 100vh;
+}
 .nav-upper, .nav-heading, .nav-menu, .menu-item{
   display: grid;
-  align-items: center;
 }
 
 .nav-heading{
@@ -26,7 +30,8 @@
   display: flex;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  padding: 20px 35px;
+  width: 80%;
 }
 .ham-menu{
   position: absolute;
@@ -81,17 +86,24 @@
 
 .nav-menu{
   grid-template-rows: repeat(7,1fr);
-  margin-top: 50px;
-  margin-left: 20px;
+  
+
 }
 
-.nav-item {
-  height: 45px;
-  width: 16em;
-  display: block;
+.menu-item {
+  height: 40px;
+  display: flex;
   color: white;
   text-decoration: none;
   border-radius: 10px;
   position: relative;
   align-items: center;
+  margin: auto 20px;
+}
+.menu-item:hover{
+  background-color: #ED217C;
+}
+.menu-item img{
+  width: 30px;
+  padding: 0 10px;
 }

@@ -48,9 +48,9 @@ const Sidebar =() => {
                 </div>
                 <div className="nav-menu">
                     {menuItem.map(({text,icon}) => (
-                        <a href="#" className='menu-item'>
+                        <a href="#" className={isExpanded ? 'menu-item' : "menu-item menu-item-NX"}>
                             <img className='menu-icon' src={icon} alt="" srcset=""/>
-                            <p className='nav-item'>{text}</p>
+                            {isExpanded && <p>{text}</p>}
                         </a>
                     ))}
 
