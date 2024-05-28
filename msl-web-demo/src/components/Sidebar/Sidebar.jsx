@@ -51,6 +51,7 @@ const Sidebar =() => {
                         <a href="#" className={isExpanded ? 'menu-item' : "menu-item menu-item-NX"}>
                             <img className='menu-icon' src={icon} alt="" srcset=""/>
                             {isExpanded && <p>{text}</p>}
+                            {!isExpanded && <div className='tooltip'>{text}</div>}
                         </a>
                     ))}
 

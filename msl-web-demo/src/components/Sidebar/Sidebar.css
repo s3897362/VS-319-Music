@@ -23,14 +23,14 @@
 .nav-heading{
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr;
-  height: 75px;
+  height: 10px;
 }
 
 .nav-brand img{
   display: flex;
   margin-left: auto;
   margin-right: auto;
-  padding: 20px 35px;
+  padding: 20px;
   width: 80%;
 }
 .ham-menu{
@@ -105,5 +105,27 @@
 }
 .menu-item img{
   width: 30px;
-  padding: 0 10px;
+  padding: 0 12px;
+}
+
+.menu-item-NX{
+  margin: auto;
+  width: 3.5em;
+}
+
+.menu-item:hover > .tooltip{
+  display: block;
+}
+
+.tooltip{
+  display: none;
+  position: absolute;
+  left: 99%;
+  bottom: 80%;
+
+  width: auto;
+  padding: 8px 8px;
+  border-radius: 10px 10px 10px 0;
+  white-space: nowwrap;
+  background-color: #ED217C;
 }
