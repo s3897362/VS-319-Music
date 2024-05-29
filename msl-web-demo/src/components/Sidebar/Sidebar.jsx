@@ -57,7 +57,7 @@ const Sidebar =() => {
 
                 </div>
                 <div className='nav-footer'>
-                    <img src="img/logout.png"></img>
+                    <a href="#"><img src="img/logout.png"></img></a>
 
                 </div>
             </div>
