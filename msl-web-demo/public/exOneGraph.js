@@ -117,6 +117,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const startIndex = scroll * 4;
             const endIndex = startIndex + range * 4;
 
+                // Update the x-axis labels to show relevant measures
+                myChart.options.scales.x.ticks.callback = function(value, index) {
+                    if (value >= startIndex && value < endIndex) {
+                        return index % 4 === 0 ? labels[value] : '';
+                    }
+                    return '';
+                };
+
             myChart.options.scales.x.min = startIndex;
             myChart.options.scales.x.max = endIndex - 1;
 
