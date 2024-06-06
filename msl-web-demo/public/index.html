@@ -3,12 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="stylesheet" href="styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="Web site created using create-react-app"
     />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -25,10 +27,41 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Muse Scene Lab</title>
+    
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <div class="container">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+    <!-- Text box 1-->
+    <div class="box1">
+      <h2> Exercise 1: Stage 1 </h2>
+      <p> Objective: Achieve the Steady tempo​
+        Interaction: Euphonic point / Horizontal Axis  ​
+        Time signature: 2x4​
+        Duration: 32 measures​ Starting point:  Hands detected and then 2 bars count off click ​
+        Metrics: The user must maintain the steady tempo for the duration of 16 measures. The metric graph will be created for each beat of the measure. </p>
+    </div>
+
+    <!-- Text box 2-->
+    <div class="box2">
+      <h2> Difficulty: </h2>
+    </div>
+
+
+    <!-- Chart -->
+    <canvas id="myChart" style="display: block; box-sizing: border-box; height: 380px; width: 1000px;" > </canvas>
+      
+      <!-- Scrolling controls -->
+      <div class="controls">
+        <label for="rangeSlider">Number of Measures: <span id="rangeValue">16</span></label>
+        <input type="range" id="rangeSlider" min="1" max="16" value="16" step="1" oninput="updateChartRange()">
+        <label for="scrollSlider">Scroll: <span id="scrollValue">0</span></label>
+        <input type="range" id="scrollSlider" min="0" max="12" value="0" step="1" oninput="updateChartRange()">
+      </div>
+    </div>
+    <script src="exOneGraph.js"></script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
