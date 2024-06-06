@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     Promise.all([
         fetch('json/020101.2024.05.27.12.20.03.json').then(response => response.json()),
-        fetch('json/020101.2024.05.27.12.20.03_copy.json').then(response => response.json()) // Add the second JSON file here
+        fetch('json/020101.2024.05.27.12.20.03_copy.json').then(response => response.json())
     ]).then(([jsonData1, jsonData2]) => {
         // Extract the values for the first dataset
         const measures1 = jsonData1.Items.map(item => item.v[0]);
@@ -25,22 +25,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const yMin = minValue - 5;
         const yMax = maxValue + 5;
 
-        // Custom plugin for x-axis labels
-        const customXAxisLabels = {
-            id: 'customXAxisLabels',
-            beforeDraw(chart, args, options) {
-                const { ctx, scales: { x } } = chart;
-                ctx.save();
-                x.ticks.forEach((tick, index) => {
-                    const measure = Math.floor(index / 4) + 1;
-                    const beat = (index % 4) + 1;
-                    const xPos = x.getPixelForTick(index);
+        // Custom plugin to draw green areas
+        const greenAreasPlugin = {
+            id: 'greenAreasPlugin',
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea: { top, bottom, left, right }, scales: { y } } = chart;
 
-                    ctx.font = beat === 1 ? 'bold 14px Arial' : 'normal 10px Arial';
-                    ctx.fillStyle = 'black';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(beat === 1 ? measure : beat, xPos, x.bottom + 10);
-                });
+                ctx.save();
+
+                // Green area from 68-72 BPM
+                const greenMin = y.getPixelForValue(68);
+                const greenMax = y.getPixelForValue(72);
+                ctx.fillStyle = 'rgba(144, 238, 144, 0.2)';
+                ctx.fillRect(left, greenMax, right - left, greenMin - greenMax);
+
+                // Less green area from 66-74 BPM
+                const lightGreenMin = y.getPixelForValue(66);
+                const lightGreenMax = y.getPixelForValue(74);
+                ctx.fillStyle = 'rgba(144, 238, 144, 0.1)';
+                ctx.fillRect(left, lightGreenMax, right - left, lightGreenMin - lightGreenMax);
+
                 ctx.restore();
             }
         };
@@ -53,14 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 labels: labels,
                 datasets: [
                     {
-                        label: 'Attempt 1',
+                        label: 'User Tempo 1',
                         data: tempo1,
                         borderColor: 'rgba(255, 99, 132, 1)',
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         fill: false,
                     },
                     {
-                        label: 'Attempt 2',
+                        label: 'User Tempo 2',
                         data: tempo2,
                         borderColor: 'rgba(54, 162, 235, 1)',
                         backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -90,16 +94,65 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     }
                 },
-                plugins: {
-                    legend: {
-                        display: true,
-                        labels: {
-                            color: 'rgb(255, 99, 132)'
-                        }
+                plugins: [greenAreasPlugin, {
+                    id: 'customXAxisLabels',
+                    afterDraw(chart) {
+                        const { ctx, scales: { x } } = chart;
+                        ctx.save();
+                        x.ticks.forEach((tick, index) => {
+                            const measure = Math.floor(index / 4) + 1;
+                            const beat = (index % 4) + 1;
+                            const xPos = x.getPixelForTick(index);
+
+                            ctx.font = beat === 1 ? 'bold 14px Arial' : 'normal 10px Arial';
+                            ctx.fillStyle = 'black';
+                            ctx.textAlign = 'center';
+                            ctx.fillText(beat === 1 ? measure : beat, xPos, x.bottom + 10);
+                        });
+                        ctx.restore();
                     }
-                }
+                }]
             }
         });
+
+        // Function to draw green areas
+        function drawGreenAreas() {
+            const { ctx, chartArea: { top, bottom, left, right }, scales: { y } } = myChart;
+
+            ctx.save();
+
+            // Green area from 68-72 BPM
+            const greenMin = y.getPixelForValue(68);
+            const greenMax = y.getPixelForValue(72);
+            console.log('Drawing green area:', { greenMin, greenMax });
+            ctx.fillStyle = 'rgba(144, 238, 144, 0.2)';
+            ctx.fillRect(left, greenMax, right - left, greenMin - greenMax);
+
+            // Less green area from 66-74 BPM
+            const lightGreenMin = y.getPixelForValue(66);
+            const lightGreenMax = y.getPixelForValue(74);
+            console.log('Drawing light green area:', { lightGreenMin, lightGreenMax });
+            ctx.fillStyle = 'rgba(144, 238, 144, 0.1)';
+            ctx.fillRect(left, lightGreenMax, right - left, lightGreenMin - lightGreenMax);
+
+            ctx.restore();
+        }
+
+        // Redraw green areas after each chart update
+        myChart.update = (function(originalUpdate) {
+            return function() {
+                originalUpdate.apply(this, arguments);
+                drawGreenAreas();
+            };
+        })(myChart.update);
+
+        // Redraw green areas on hover
+        myChart.render = (function(originalRender) {
+            return function() {
+                originalRender.apply(this, arguments);
+                drawGreenAreas();
+            };
+        })(myChart.render);
 
         // Function to update the chart range
         window.updateChartRange = function() {
@@ -117,16 +170,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const startIndex = scroll * 4;
             const endIndex = startIndex + range * 4;
 
-                // Update the x-axis labels to show relevant measures
-                myChart.options.scales.x.ticks.callback = function(value, index) {
-                    if (value >= startIndex && value < endIndex) {
-                        return index % 4 === 0 ? labels[value] : '';
-                    }
-                    return '';
-                };
-
             myChart.options.scales.x.min = startIndex;
             myChart.options.scales.x.max = endIndex - 1;
+
+            // Update the x-axis labels to show relevant measures
+            myChart.options.scales.x.ticks.callback = function(value, index) {
+                if (value >= startIndex && value < endIndex) {
+                    return index % 4 === 0 ? labels[value] : '';
+                }
+                return '';
+            };
 
             myChart.update();
         };
@@ -142,5 +195,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateChartRange();
             }
         });
+
+        // Initial draw of green areas
+        myChart.update();
     }).catch(error => console.error('Error fetching the JSON data:', error));
 });
