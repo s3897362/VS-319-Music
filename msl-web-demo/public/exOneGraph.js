@@ -96,6 +96,32 @@ document.addEventListener('DOMContentLoaded', () => {
                         labels: {
                             color: 'rgb(255, 99, 132)'
                         }
+                    },
+                    annotation: {
+                        annotations: {
+                            box1: {
+                                type: 'box',
+                                xMin: 0,
+                                xMax: labels.length - 1,
+                                yMin: 65,
+                                yMax: 75,
+                                backgroundColor: 'rgba(223, 255, 231, 0.6)',
+                                borderColor: 'rgba(223, 255, 231, 0.6)',
+                                borderWidth: 1,
+                                drawTime: 'beforeDatasetsDraw' // Draw behind the datasets
+                            },
+                            box2: {
+                                type: 'box',
+                                xMin: 0,
+                                xMax: labels.length - 1,
+                                yMin: 69.5,
+                                yMax: 70.5,
+                                backgroundColor: 'rgba(149, 254, 180, 0.6)',
+                                borderColor: 'rgba(149, 254, 180, 0.6)',
+                                borderWidth: 1,
+                                drawTime: 'beforeDatasetsDraw' // Draw behind the datasets
+                            }
+                        }
                     }
                 }
             }
