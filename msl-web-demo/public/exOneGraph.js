@@ -101,6 +101,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        document.getElementById('toggleStepped').addEventListener('click', function() {
+            myChart.data.datasets.forEach(function(dataset) {
+                dataset.stepped = !dataset.stepped;
+            });
+            myChart.update();
+        });
+
         // Function to update the chart range
         window.updateChartRange = function() {
             const rangeSlider = document.getElementById('rangeSlider');
