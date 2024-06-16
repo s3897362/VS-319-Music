@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/VS-319-Music/static/css/main.ff883e8d.css",
+    "main.js": "/VS-319-Music/static/js/main.08b977fd.js",
+    "static/js/453.0cd98108.chunk.js": "/VS-319-Music/static/js/453.0cd98108.chunk.js",
+    "index.html": "/VS-319-Music/index.html",
+    "main.ff883e8d.css.map": "/VS-319-Music/static/css/main.ff883e8d.css.map",
+    "main.08b977fd.js.map": "/VS-319-Music/static/js/main.08b977fd.js.map",
+    "453.0cd98108.chunk.js.map": "/VS-319-Music/static/js/453.0cd98108.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ff883e8d.css",
+    "static/js/main.08b977fd.js"
+  ]
+}

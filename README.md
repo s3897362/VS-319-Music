@@ -1,11 +1,16 @@
-# VS-319-Music
+To setup:
+- install node.js, https://nodejs.org/en
+- in terminal navigate to directory ../msl-web-demo
+- in terminal run npm install
+- in terminal run npm start
 
-2 products have been created:
+Current functionality:
+currently this is setup as a demo for the code to interperet the JSON files containing excercise score,
+it is able to plot graphs based of new functions with some limitations,
+currently hardcoded and inflexible is the time signature and accuracy bars,
+new ones would need to be made to suit other excercises and we recommend doing so if you wish to expand the prototype
 
-MPAP Design contains a download of the Figma created for the Music Performance Analysis (Web) Platform 
-https://www.figma.com/design/ns68b2JqtlmeWyzX2GGd5B/MPAP-Design?node-id=0-1&t=YFKB46iM6Gm1jivv-0
-It is best viewed through the link but this copy is here if nessecary
-
-msl-web-demo contains the web prototype that translates data generated through msl's vr app (see web-demo-json for examples)
-msl-web-demo requires react knowledge to setup however there should be a functioning version at:
-https://s3897362.github.io/VS-319-Music
+Other functions
+- Number of measures, changes the number of measures currently displayed
+- Scroll, allows for scrolling, number of measures has to be less than max (16 in this case) for this to be visible
+- Toggle stepped lines, changes line graphs to stepped line graphs
